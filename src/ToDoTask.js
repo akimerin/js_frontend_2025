@@ -5,28 +5,28 @@ import { todoDelete, todoUpdateState } from './actions'
 class ToDoTask extends React.Component {
   constructor(props) {
     super(props);
-
+	
     this.onStatusClick = this.onStatusClick.bind(this);
     this.onDeleteClick = this.onDeleteClick.bind(this);
   }
 
   onStatusClick(e) {
     e.preventDefault();
-
+	
     fetch(`tasks/${this.props.task._id}`,{
-        method:'PATCH',
-        body: JSON.stringify({
-        done: !this.props.task.done
+		method:'PATCH',
+		body: JSON.stringify({
+		done: !this.props.task.done
     }),
-    headers:  {
-        'Content-Type':'application/json'
-    }
-    }).then((res)=> {
+	headers:  {
+		'Content-Type':'application/json'
+	}
+	}).then((res)=> {
       if (res.status === 200) {
         console.log('Updated');
-        this.props.dispatch(todoUpdateState(this.props.task._id))
+		this.props.dispatch(todoUpdateState(this.props.task._id))
       } 
-      else {
+	  else {
         console.log('Not updated');
       }
     });
@@ -36,14 +36,14 @@ class ToDoTask extends React.Component {
     e.preventDefault();
 
     fetch(`tasks/${this.props.task._id}`,{
-        method:'DELETE'
-    }).then((res)=> {
+		method:'DELETE'
+	}).then((res)=> {
       if (res.status === 200) {
         console.log('Deleted');
 
-        this.props.dispatch(todoDelete(this.props.task._id))
+		this.props.dispatch(todoDelete(this.props.task._id))
       } 
-      else {
+	  else {
         console.log('Not deleted');
       }
     });
@@ -51,7 +51,7 @@ class ToDoTask extends React.Component {
 
   render() {
     return (
-	  <li className="list-group-item">
+	 <li className="list-group-item">
   {this.props.task.done
     ? <div className="todo-indicator bg-success"></div>
     : <div className="todo-indicator bg-focus"></div>}
@@ -80,7 +80,6 @@ class ToDoTask extends React.Component {
     </div>
   </div>
 </li>
-
     );
   }
 }
